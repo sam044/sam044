@@ -1,16 +1,33 @@
+<div align="center">
 
-💻 **OS:** Windows 11 / XOS by 
-🧠 **Languages:** Java, C++, Python  
-📈 **Interests:** Algorithms, Quant Finance, Game Dev  
+# **Sam Flynn**
+**Age:** 20 • **From:** Northern Virginia (NoVA)
 
----
-
-### 📊 Stats & Metrics
-
-![Sam’s GitHub stats](https://github-readme-stats.vercel.app/api?username=sam044&show_icons=true&theme=radical)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=sam044&layout=compact&theme=radical)
+</div>
 
 ---
 
-### 🔗 Connect
-[LinkedIn](https://linkedin.com/in/samflynn) • [Portfolio](https://samflynn.dev)
+### 👨‍💻 Programming Languages
+`C++` · `Python` · `Java`
+
+### 🧰 Computer Languages / Markup
+`HTML` · `JSON` · `LaTeX`
+
+### 🌍 Languages
+`English`
+
+### 🏋️ Hobbies
+`Coding` · `Weightlifting`
+
+### 📫 Contact
+- **Personal:** <samuelpflynn1@gmail.com>  
+- **Student:** <spf16574@email.vccs.edu>
+
+---
+
+<!-- Optional: quick links row (edit your handles/URLs) -->
+<p align="center">
+  <a href="https://github.com/sam044">GitHub</a> •
+  <a href="https://www.linkedin.com/in/samflynn">LinkedIn</a> •
+  <a href="mailto:samuelpflynn1@gmail.com">Email</a>
+</p>
