@@ -1,6 +1,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/sam044/sam044/main/banner.svg" width="800">
 </p>
+
 <pre>
 Sam Flynn
 ──────────────────────────────────────────────────────────────
@@ -12,7 +13,7 @@ Sam Flynn
 <b style="color:#f39c12;">Languages.Computer:</b>      <span style="color:#3fa7ff;">HTML, JSON, LaTeX</span>  
 <b style="color:#f39c12;">Languages.Natural:</b>       <span style="color:#3fa7ff;">English</span>  
 
-<b style="color:#f39c12;">Hobbies:</b>  <span style="color:#3fa7ff;">Software Architecture, Algorithmic Design, Weightlifting</span>  
+<b style="color:#f39c12;">Hobbies:</b>  <span style="color:#3fa7ff;">Software Architecture, Algorithmic Design, Weightlifting, Gaming</span>  
 
 <b style="color:#f39c12;">Contact:</b>  
   Personal.Email:   <span style="color:#3fa7ff;">samuelpflynn1@gmail.com</span>  
