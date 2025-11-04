@@ -62,8 +62,8 @@ def find_and_replace(root, element_id: str, new_text: str):
     el = root.find(f".//*[@id='{element_id}']")
     if el is None: return
     el.text = str(new_text)
-    parent_x = el.getparent().get("x")
-    if parent_x: el.set("x", parent_x)
+    # parent_x = el.getparent().get("x")
+    # if parent_x: el.set("x", parent_x)
 
 def justify_format(root, eid, new_text, length=0):
     if isinstance(new_text, int): new_text = f"{new_text:,}"
