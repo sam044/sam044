@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
-  style="background-color:#0d1117;font-family:'Consolas','Courier New',monospace';">
+  style="background-color:#0d1117;font-family:Consolas, 'Courier New', monospace;">
   <style>
     .o { fill:#f39c12; font-weight:bold; }
     .b { fill:#3fa7ff; }
