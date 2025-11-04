@@ -2,7 +2,7 @@
 <div align="left">
 
 <pre>
-<span style="color:#3fa7ff;"><b>sam@flynn</b></span>
+<span style="color:#3fa7ff;"><b>Sam Flynn</b></span>
 ──────────────────────────────────────────────────────────────
 <span style="color:#3fa7ff;">Age:</span>               20 years
 <span style="color:#3fa7ff;">Location:</span>          Northern Virginia (NoVA)
