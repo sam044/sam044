@@ -30,7 +30,7 @@ data = {
 Y0   = 40   # header line
 STEP = 30   # line spacing
 
-svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
   style="background-color:{BG};font-family:{FONT};">
   <style>
     .o {{ fill:{ORANGE}; font-weight:bold; }}
