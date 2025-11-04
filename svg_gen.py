@@ -1,91 +1,41 @@
-import datetime
-import html
+from datetime import date
+from lxml import etree
 
-# Colors & font
-ORANGE = "#f39c12"
-BLUE   = "#3fa7ff"
-GRAY   = "#d9d9d9"
-BG     = "#0d1117"
-FONT   = "Consolas, 'Courier New', monospace"
-
-# Data (your values)
-data = {
-    "name": "Sam Flynn",
-    "date": datetime.date.today().strftime("%b %d, %Y"),
-    "location": "Northern Virginia (NoVA)",
-    "education": "Computer Science & Mathematics Student",
-    "age": "20 years",
-    "prog": "Java, Python, C++",
-    "comp": "HTML, JSON, LaTeX",
-    "lang": "English",
-    "hobbies": "Software Architecture, Algorithmic Design, Gaming, Weightlifting",
-    "personal": "samuelpflynn1@gmail.com",
-    "student": "spf16574@email.vccs.edu",
-    "repos": "1",
-    "commits": "000",
-    "stars": "0",
-    "followers": "0",
+# Values you want to show (you can wire these to API later)
+VALUES = {
+    "location_data":  "Northern Virginia (NoVA)",
+    "education_data": "Computer Science & Mathematics Student",  # literal OK; SVG has &amp; in template
+    "age_data":       "20 years",
+    "prog_data":      "Java, Python, C++",
+    "comp_data":      "HTML, JSON, LaTeX",
+    "lang_data":      "English",
+    "hobbies_data":   "Software Architecture, Algorithmic Design, Gaming, Weightlifting",
+    "personal_data":  "samuelpflynn1@gmail.com",
+    "student_data":   "spf16574@email.vccs.edu",
+    "stats_data":     "Repos 1 | Commits 000 | Stars 0 | Followers 0",
 }
 
-# Escape XML-reserved chars just in case (e.g., the & in CS & Math)
-for k, v in data.items():
-    if isinstance(v, str):
-        data[k] = html.escape(v, quote=False)
+def set_text(root, element_id, text):
+    el = root.find(f".//*[@id='{element_id}']")
+    if el is not None:
+        el.text = text
 
-# Positions
-Y0   = 40
-STEP = 30
+def main():
+    fname = "banner.svg"
+    tree = etree.parse(fname)
+    root = tree.getroot()
 
-# Header line with an em-dash written as \u2014 to avoid smart-char issues
-header_text = f"{data['name']} &#8212; Updated {data['date']}"
+    # Header line (keeps em dash entity already in SVG; we just swap the date)
+    header = root.find(".//*[@id='header']")
+    if header is not None:
+        header.text = f"Sam Flynn — Updated {date.today().strftime('%b %d, %Y')}"
 
+    # Fill fields
+    for k, v in VALUES.items():
+        set_text(root, k, v)
 
-svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
-  style="background-color:{BG};font-family:{FONT};">
-  <style>
-    .o {{ fill:{ORANGE}; font-weight:bold; }}
-    .b {{ fill:{BLUE}; }}
-    .t {{ fill:{GRAY}; }}
-  </style>
+    tree.write(fname, encoding="utf-8", xml_declaration=True)
 
-  <!-- Header -->
-  <text x="25" y="{Y0}" class="t">{header_text}</text>
-
-  <!-- Body -->
-  <text x="25"  y="{Y0+2*STEP}" class="o">Location:</text>
-  <text x="260" y="{Y0+2*STEP}" class="b">{data['location']}</text>
-
-  <text x="25"  y="{Y0+3*STEP}" class="o">Education:</text>
-  <text x="260" y="{Y0+3*STEP}" class="b">{data['education']}</text>
-
-  <text x="25"  y="{Y0+4*STEP}" class="o">Age:</text>
-  <text x="260" y="{Y0+4*STEP}" class="b">{data['age']}</text>
-
-  <text x="25"  y="{Y0+6*STEP}" class="o">Languages-Programming:</text>
-  <text x="260" y="{Y0+6*STEP}" class="b">{data['prog']}</text>
-
-  <text x="25"  y="{Y0+7*STEP}" class="o">Languages-Computer:</text>
-  <text x="260" y="{Y0+7*STEP}" class="b">{data['comp']}</text>
-
-  <text x="25"  y="{Y0+8*STEP}" class="o">Languages-Natural:</text>
-  <text x="260" y="{Y0+8*STEP}" class="b">{data['lang']}</text>
-
-  <text x="25"  y="{Y0+10*STEP}" class="o">Hobbies:</text>
-  <text x="260" y="{Y0+10*STEP}" class="b">{data['hobbies']}</text>
-
-  <text x="25"  y="{Y0+12*STEP}" class="o">Personal-Email:</text>
-  <text x="260" y="{Y0+12*STEP}" class="b">{data['personal']}</text>
-
-  <text x="25"  y="{Y0+13*STEP}" class="o">Student-Email:</text>
-  <text x="260" y="{Y0+13*STEP}" class="b">{data['student']}</text>
-
-  <text x="25"  y="{Y0+15*STEP}" class="o">GitHub Stats:</text>
-  <text x="260" y="{Y0+15*STEP}" class="b">
-    Repos {data['repos']} | Commits {data['commits']} | Stars {data['stars']} | Followers {data['followers']}
-  </text>
-</svg>
-"""
-
-with open("banner.svg", "w", encoding="utf-8") as f:
-    f.write(svg)
-print("✅ banner.svg generated")
+if __name__ == "__main__":
+    main()
+    print("✅ banner.svg updated")
