@@ -1,2 +1,3 @@
-jinja2
+lxml
 requests
+python-dateutil
