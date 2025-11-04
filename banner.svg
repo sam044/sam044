@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" style="background-color:#0d1117;font-family:Consolas, 'Courier New', monospace;">
 <style>
-@font-face {
+@font-face{
   src: local('Consolas'), local('Consolas Bold');
   font-family: 'ConsolasFallback';
   font-display: swap;
-  }
+}
 .key { fill:#ffa657; }
 .value { fill:#a5d6ff; }
 .addColor { fill:#3fb950; }
