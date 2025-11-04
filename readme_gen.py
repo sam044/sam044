@@ -62,6 +62,7 @@ def find_and_replace(root, element_id: str, new_text: str):
     el = root.find(f".//*[@id='{element_id}']")
     if el is None: return
     el.text = str(new_text)
+    # Removed setting x attribute to prevent text overlap in GitHub Stats
     # parent_x = el.getparent().get("x")
     # if parent_x: el.set("x", parent_x)
 
