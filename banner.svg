@@ -40,9 +40,10 @@
   <!-- GitHub Stats Section -->
   <text x="25" y="490" class="o">GitHub Stats:</text>
   <text x="260" y="490" class="b">
-    Repos<tspan id="repo_data_dots" x="260"> ..... </tspan><tspan id="repo_data" x="260">2</tspan> |
-    Stars<tspan id="star_data_dots" x="260"> ............. </tspan><tspan id="star_data" x="260">0</tspan> |
-    Commits<tspan id="commit_data_dots" x="260"> .................... </tspan><tspan id="commit_data" x="260">67</tspan> |
-    Followers<tspan id="follower_data_dots" x="260"> ......... </tspan><tspan id="follower_data" x="260">1</tspan>
-  </text>
+  Repos<tspan id="repo_data_dots"> </tspan><tspan id="repo_data">0</tspan> |
+  Stars<tspan id="star_data_dots"> </tspan><tspan id="star_data">0</tspan> |
+  Commits<tspan id="commit_data_dots"> </tspan><tspan id="commit_data">0</tspan> |
+  Followers<tspan id="follower_data_dots"> </tspan><tspan id="follower_data">0</tspan>
+</text>
+
 </svg>
