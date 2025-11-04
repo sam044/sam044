@@ -1,6 +1,3 @@
-"""
-"""
-
 from __future__ import annotations
 import datetime
 import os
@@ -32,7 +29,7 @@ QUERY_COUNT = {k: 0 for k in [
 ]}
 
 # ╭──────────────────────────────────╮
-# │  Utility helpers (Alan-style)   │
+# │  Utility helpers  │
 # ╰──────────────────────────────────╯
 def uptime_string(bday: datetime.datetime) -> str:
     diff = relativedelta.relativedelta(datetime.datetime.utcnow(), bday)
@@ -77,7 +74,100 @@ def justify_format(root, eid, new_text, length=0):
     find_and_replace(root, f"{eid}_dots", dot_string)
 
 def svg_overwrite(fname, *vals):
-    # Order matches Alan’s usage:
+    # Order matches aaa’s usage:
     # age, commits, stars, repos, contributed, followers, loc_tuple
     age, comm, star, repo, contrib, follow, loc = vals
-    tree = etree.parse(fname); root
+    tree = etree.parse(fname); root = tree.getroot()
+    # Optional age (if your SVG has id="age_data" and "age_data_dots")
+    justify_format(root, 'age_data', age)
+    justify_format(root, 'commit_data',   comm,   22)
+    justify_format(root, 'star_data',     star,   14)
+    justify_format(root, 'repo_data',     repo,    6)
+    justify_format(root, 'contrib_data',  contrib)
+    justify_format(root, 'follower_data', follow, 10)
+    # LOC placeholders (aaa’s SVG shows these IDs; keep zeros if you don’t render them)
+    justify_format(root, 'loc_data', loc[2], 9)
+    justify_format(root, 'loc_add',  loc[0])
+    justify_format(root, 'loc_del',  loc[1], 7)
+    tree.write(fname, encoding='utf-8', xml_declaration=True)
+
+# ╭──────────────────────────────────╮
+# │  GraphQL helpers (exact names)   │
+# ╰──────────────────────────────────╯
+def user_getter(username: str):
+    query_count('user_getter')
+    q = """query($login:String!){ user(login:$login){ id createdAt }}"""
+    data = simple_request('user_getter', q, {"login": username})["data"]["user"]
+    return {"id": data['id']}, data['createdAt']
+
+def follower_getter(username: str) -> int:
+    query_count('follower_getter')
+    q = """query($login:String!){ user(login:$login){ followers{ totalCount }}}"""
+    return int(simple_request('follower_getter', q, {"login": username})["data"]["user"]["followers"]["totalCount"])
+
+def graph_repos_stars(kind: str, aff: list[str], cursor=None):
+    query_count('graph_repos_stars')
+    q = """query($owner_affiliation:[RepositoryAffiliation],$login:String!,$cursor:String){
+      user(login:$login){
+        repositories(first:100, after:$cursor, ownerAffiliations:$owner_affiliation, isFork:false){
+          totalCount
+          edges{ node{ stargazers{ totalCount } } }
+          pageInfo{ endCursor hasNextPage }
+        }
+      }}"""
+    vars = {"owner_affiliation": aff, "login": USER_NAME, "cursor": cursor}
+    r = simple_request('graph_repos_stars', q, vars)["data"]["user"]["repositories"]
+    if kind == 'repos':
+        # Follow next pages to be exact for stars; totalCount is included here already
+        return r["totalCount"]
+    # Sum stars across all pages
+    stars = sum(e["node"]["stargazers"]["totalCount"] for e in r["edges"])
+    while r["pageInfo"]["hasNextPage"]:
+        vars["cursor"] = r["pageInfo"]["endCursor"]
+        r = simple_request('graph_repos_stars', q, vars)["data"]["user"]["repositories"]
+        stars += sum(e["node"]["stargazers"]["totalCount"] for e in r["edges"])
+    return stars
+
+def commits_last_year(username: str) -> int:
+    query_count('commits_last_year')
+    q = """query($login:String!){
+      user(login:$login){ contributionsCollection { totalCommitContributions }}}"""
+    return int(simple_request('commits_last_year', q, {"login": username})["data"]["user"]["contributionsCollection"]["totalCommitContributions"])
+
+def contributed_repos_count(username: str) -> int:
+    query_count('contributed_repos_count')
+    q = """query($login:String!, $cursor:String){
+      user(login:$login){
+        repositoriesContributedTo(first:100, after:$cursor, includeUserRepositories:false,
+          contributionTypes:[COMMIT,ISSUE,PULL_REQUEST,REPOSITORY]){
+          pageInfo { hasNextPage endCursor }
+          totalCount
+        }}}"""
+    r = simple_request('contributed_repos_count', q, {"login": username, "cursor": None})["data"]["user"]["repositoriesContributedTo"]
+    return int(r["totalCount"])
+
+# ╭──────────────────────────────────╮
+# │  Main (matches aaa’s flow)     │
+# ╰──────────────────────────────────╯
+if __name__ == '__main__':
+    print('Calculation times:')
+    (user_data, acc_date), t_user = perf_counter(user_getter, USER_NAME)
+    formatter('account data', t_user)
+    age_str, t_age = perf_counter(uptime_string, BIRTHDAY)
+    formatter('age calculation', t_age)
+
+    # Stars & repos via the same helper
+    star_data = graph_repos_stars('stars', ["OWNER"])
+    repo_data = graph_repos_stars('repos', ["OWNER"])
+
+    contrib_data = contributed_repos_count(USER_NAME)
+    follower_data = follower_getter(USER_NAME)
+    commit_data = commits_last_year(USER_NAME)
+
+    # LOC not implemented here (same as aaa’s public script baseline)
+    loc_total = ['0', '0', '0']  # add real LOC later if you want
+
+    for svg in SVG_FILES:
+        svg_overwrite(svg, age_str, commit_data, star_data, repo_data, contrib_data, follower_data, loc_total)
+
+    print('Total GraphQL calls:', sum(QUERY_COUNT.values()))
