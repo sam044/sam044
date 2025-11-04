@@ -7,9 +7,9 @@
   </style>
 
   <!-- Header -->
-  <text x="25" y="40" class="t">Sam Flynn — Updated Nov 04, 2025</text>
+  <text x="25" y="40" class="t">Sam Flynn \u2014 Updated Nov 04, 2025</text>
 
-  <!-- Left labels (orange) and right values (blue) -->
+  <!-- Body -->
   <text x="25"  y="100" class="o">Location:</text>
   <text x="260" y="100" class="b">Northern Virginia (NoVA)</text>
 
