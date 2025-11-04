@@ -5,7 +5,7 @@ ORANGE = "#f39c12"
 BLUE   = "#3fa7ff"
 GRAY   = "#d9d9d9"
 BG     = "#0d1117"
-FONT   = "'Consolas','Courier New',monospace'"
+FONT = "Consolas, 'Courier New', monospace"
 
 data = {
     "name": "Sam Flynn",
