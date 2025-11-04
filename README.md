@@ -7,19 +7,19 @@
 
 ---
 
-### 👨‍💻 Programming Languages
-`C++` · `Python` · `Java`
+### Programming Languages
+`Java` · `Python` · `C++`
 
-### 🧰 Computer Languages / Markup
+### Computer Languages / Markup
 `HTML` · `JSON` · `LaTeX`
 
-### 🌍 Languages
+### Languages
 `English`
 
-### 🏋️ Hobbies
+### Hobbies
 `Coding` · `Weightlifting`
 
-### 📫 Contact
+### Contact
 - **Personal:** <samuelpflynn1@gmail.com>  
 - **Student:** <spf16574@email.vccs.edu>
 
