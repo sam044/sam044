@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
-  style="background-color:#0d1117;font-family:Consolas, 'Courier New', monospace;">
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" style="background-color:#0d1117;font-family:Consolas, 'Courier New', monospace;">
   <style>
     .o { fill:#f39c12; font-weight:bold; }
     .b { fill:#3fa7ff; }
@@ -10,39 +10,39 @@
   <text x="25" y="40" class="t">Sam Flynn — Updated Nov 04, 2025</text>
 
   <!-- Body -->
-  <text x="25"  y="100" class="o">Location:</text>
+  <text x="25" y="100" class="o">Location:</text>
   <text x="260" y="100" class="b">Northern Virginia (NoVA)</text>
 
-  <text x="25"  y="130" class="o">Education:</text>
+  <text x="25" y="130" class="o">Education:</text>
   <text x="260" y="130" class="b">Computer Science &amp; Mathematics Student</text>
 
-  <text x="25"  y="160" class="o">Age:</text>
+  <text x="25" y="160" class="o">Age:</text>
   <text x="260" y="160" class="b">20 years</text>
 
-  <text x="25"  y="220" class="o">Languages-Programming:</text>
+  <text x="25" y="220" class="o">Languages-Programming:</text>
   <text x="260" y="220" class="b">Java, Python, C++</text>
 
-  <text x="25"  y="250" class="o">Languages-Computer:</text>
+  <text x="25" y="250" class="o">Languages-Computer:</text>
   <text x="260" y="250" class="b">HTML, JSON, LaTeX</text>
 
-  <text x="25"  y="280" class="o">Languages-Natural:</text>
+  <text x="25" y="280" class="o">Languages-Natural:</text>
   <text x="260" y="280" class="b">English</text>
 
-  <text x="25"  y="340" class="o">Hobbies:</text>
+  <text x="25" y="340" class="o">Hobbies:</text>
   <text x="260" y="340" class="b">Software Architecture, Algorithmic Design, Gaming, Weightlifting</text>
 
-  <text x="25"  y="400" class="o">Personal-Email:</text>
+  <text x="25" y="400" class="o">Personal-Email:</text>
   <text x="260" y="400" class="b">samuelpflynn1@gmail.com</text>
 
-  <text x="25"  y="430" class="o">Student-Email:</text>
+  <text x="25" y="430" class="o">Student-Email:</text>
   <text x="260" y="430" class="b">spf16574@email.vccs.edu</text>
 
   <!-- GitHub Stats Section -->
-  <text x="25"  y="490" class="o">GitHub Stats:</text>
+  <text x="25" y="490" class="o">GitHub Stats:</text>
   <text x="260" y="490" class="b">
-    Repos<tspan id="repo_data_dots"> </tspan><tspan id="repo_data">0</tspan> |
-    Stars<tspan id="star_data_dots"> </tspan><tspan id="star_data">0</tspan> |
-    Commits<tspan id="commit_data_dots"> </tspan><tspan id="commit_data">0</tspan> |
-    Followers<tspan id="follower_data_dots"> </tspan><tspan id="follower_data">0</tspan>
+    Repos<tspan id="repo_data_dots" x="260"> ..... </tspan><tspan id="repo_data" x="260">2</tspan> |
+    Stars<tspan id="star_data_dots" x="260"> ............. </tspan><tspan id="star_data" x="260">0</tspan> |
+    Commits<tspan id="commit_data_dots" x="260"> .................... </tspan><tspan id="commit_data" x="260">66</tspan> |
+    Followers<tspan id="follower_data_dots" x="260"> ......... </tspan><tspan id="follower_data" x="260">1</tspan>
   </text>
 </svg>
