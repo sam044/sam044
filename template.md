@@ -1,24 +1,26 @@
+<pre>
 {{ banner }}
 
-Sam Flynn
-──────────────────────────────────────────────────────────────
-Age:               {{ age }}
-Location:          Northern Virginia (NoVA)
-Education:         Computer Science & Mathematics Student
+<b>Sam Flynn</b>
+───────────────────────────────────────────────
+<b>Age:</b>               20 years
+<b>Location:</b>          Northern Virginia (NoVA)
+<b>Education:</b>         Computer Science & Mathematics Student
 
-Languages-Programming:    Java, Python, C++
-Languages-Computer:       HTML, JSON, LaTeX
-Languages-Natural:        English
+<b>Languages.Programming:</b>    Java, Python, C++
+<b>Languages.Computer:</b>       HTML, JSON, LaTeX
+<b>Languages.Natural:</b>        English
 
-Hobbies:           Software Architecture, Algorithmic Design, Gaming, Lifting
+<b>Hobbies:</b>           Software Architecture, Algorithmic Design, Weightlifting.
 
-Contact:
-  Personal-Email:   samuelpflynn1@gmail.com
-  Student-Email:    spf16574@email.vccs.edu
+<b>Contact:</b>
+  Personal:   samuelpflynn1@gmail.com
+  Student:    spf16574@email.vccs.edu
 
-Stats (auto-generated):
+<b>GitHub Stats:</b>
   Repositories:     {{ repos }}
   Commits:          {{ commits }}
   Stars:            {{ stars }}
   Followers:        {{ followers }}
-──────────────────────────────────────────────────────────────
+───────────────────────────────────────────────
+</pre>
