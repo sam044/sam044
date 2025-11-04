@@ -32,7 +32,7 @@ jobs:
           pip install --upgrade pip
           pip install -r cache/requirements.txt
 
-      - name: Generate banner
+      - name: Run banner generator
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: ${{ github.repository_owner }}
