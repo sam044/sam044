@@ -15,8 +15,8 @@
 <span style="color:#f78c00;"><b>Hobbies:</b></span>           <span style="color:#8be9fd;">Software Architecture, Algorithmic Design, Gaming, Lifting</span>
 
 <span style="color:#f78c00;"><b>Contact:</b></span>
-  <span style="color:#f78c00;">Personal-Email:</span>   <span style="color:#8be9fd;">samuelpflynn1@gmail.com</span>
-  <span style="color:#f78c00;">Student-Email:</span>    <span style="color:#8be9fd;">spf16574@email.vccs.edu</span>
+<span style="color:#f78c00;">Personal-Email:</span>   <span style="color:#8be9fd;">samuelpflynn1@gmail.com</span>
+<span style="color:#f78c00;">Student-Email:</span>    <span style="color:#8be9fd;">spf16574@email.vccs.edu</span>
 ──────────────────────────────────────────────────────────────
 </pre>
 
