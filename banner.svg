@@ -13,6 +13,7 @@
 .cc { fill:#616e7f; }
 .o { fill:#8b949e; }
 .b { fill:#ffa657; }
+.t { fill:#8b949e; }
 text,tspan { white-space:pre; }
 </style>
 
