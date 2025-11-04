@@ -69,10 +69,11 @@ def find_and_replace(root, element_id: str, new_text: str):
 def justify_format(root, eid, new_text, length=0):
     if isinstance(new_text, int): new_text = f"{new_text:,}"
     find_and_replace(root, eid, new_text)
-    just_len = max(0, length - len(str(new_text)))
-    dot_map = {0:'', 1:' ', 2:'. '}
-    dot_string = dot_map.get(just_len, ' ' + '.'*just_len + ' ')
-    find_and_replace(root, f"{eid}_dots", dot_string)
+    # Removed dot generation - dots no longer needed
+    # just_len = max(0, length - len(str(new_text)))
+    # dot_map = {0:'', 1:' ', 2:'. '}
+    # dot_string = dot_map.get(just_len, ' ' + '.'*just_len + ' ')
+    # find_and_replace(root, f"{eid}_dots", dot_string)
 
 def svg_overwrite(fname, *vals):
     # Order matches aaa’s usage:
