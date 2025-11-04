@@ -1,8 +1,9 @@
-
+<p align="center">
+  <img src="banner.svg">
+</p>
 <pre>
 Sam Flynn
 ──────────────────────────────────────────────────────────────
-<b style="color:#f39c12;">OS:</b>                  Windows 11, Ubuntu 22.04  
 <b style="color:#f39c12;">Location:</b>            Northern Virginia (NoVA)  
 <b style="color:#f39c12;">Education:</b>           Computer Science & Mathematics Student  
 <b style="color:#f39c12;">Age:</b>                 20 years  
