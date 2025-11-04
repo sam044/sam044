@@ -47,7 +47,7 @@
 </text>
 
 <text x="260" y="510" class="b">
-  <tspan class="o">Commits</tspan><tspan id="commit_data_dots" x="260"> .................... </tspan><tspan id="commit_data" x="260">75</tspan>
+  <tspan class="o">Commits</tspan><tspan id="commit_data_dots" x="260"> .................... </tspan><tspan id="commit_data" x="260">76</tspan>
   | <tspan class="o">Followers</tspan><tspan id="follower_data_dots" x="260"> ......... </tspan><tspan id="follower_data" x="260">1</tspan>
 </text>
 </svg>
