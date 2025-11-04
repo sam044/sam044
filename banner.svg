@@ -1,41 +1,50 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" style="background-color:#0d1117;font-family:Consolas, 'Courier New', monospace;">
-  <style>
-    .o { fill:#f39c12; font-weight:bold; }
-    .b { fill:#3fa7ff; }
-    .t { fill:#d9d9d9; }
-  </style>
+<style>
+@font-face {
+  src: local('Consolas'), local('Consolas Bold');
+  font-family: 'ConsolasFallback';
+  font-display: swap;
+  }
+.key { fill:#ffa657; }
+.value { fill:#a5d6ff; }
+.addColor { fill:#3fb950; }
+.delColor { fill:#f85149; }
+.cc { fill:#616e7f; }
+text,tspan { white-space:pre; }
+</style>
 
-  <!-- Header -->
-  <text x="25" y="40" class="t">Sam Flynn — Updated Nov 04, 2025</text>
 
-  <!-- Body -->
-  <text x="25" y="100" class="o">Location:</text>
-  <text x="260" y="100" class="b">Northern Virginia (NoVA)</text>
+<!-- Header -->
+<text x="25" y="40" class="t">Sam Flynn — Updated Nov 04, 2025</text>
 
-  <text x="25" y="130" class="o">Education:</text>
-  <text x="260" y="130" class="b">Computer Science &amp; Mathematics Student</text>
+<!-- Body -->
+<text x="25" y="100" class="o">Location:</text>
+<text x="260" y="100" class="b">Northern Virginia (NoVA)</text>
 
-  <text x="25" y="160" class="o">Age:</text>
-  <text x="260" y="160" class="b">20 years</text>
+<text x="25" y="130" class="o">Education:</text>
+<text x="260" y="130" class="b">Computer Science &amp; Mathematics Student</text>
 
-  <text x="25" y="220" class="o">Languages-Programming:</text>
-  <text x="260" y="220" class="b">Java, Python, C++</text>
+<text x="25" y="160" class="o">Age:</text>
+<text x="260" y="160" class="b">20 years</text>
 
-  <text x="25" y="250" class="o">Languages-Computer:</text>
-  <text x="260" y="250" class="b">HTML, JSON, LaTeX</text>
+<text x="25" y="220" class="o">Languages-Programming:</text>
+<text x="260" y="220" class="b">Java, Python, C++</text>
 
-  <text x="25" y="280" class="o">Languages-Natural:</text>
-  <text x="260" y="280" class="b">English</text>
+<text x="25" y="250" class="o">Languages-Computer:</text>
+<text x="260" y="250" class="b">HTML, JSON, LaTeX</text>
 
-  <text x="25" y="340" class="o">Hobbies:</text>
-  <text x="260" y="340" class="b">Software Architecture, Algorithmic Design, Gaming, Weightlifting</text>
+<text x="25" y="280" class="o">Languages-Natural:</text>
+<text x="260" y="280" class="b">English</text>
 
-  <text x="25" y="400" class="o">Personal-Email:</text>
-  <text x="260" y="400" class="b">samuelpflynn1@gmail.com</text>
+<text x="25" y="340" class="o">Hobbies:</text>
+<text x="260" y="340" class="b">Software Architecture, Algorithmic Design, Gaming, Weightlifting</text>
 
-  <text x="25" y="430" class="o">Student-Email:</text>
-  <text x="260" y="430" class="b">spf16574@email.vccs.edu</text>
+<text x="25" y="400" class="o">Personal-Email:</text>
+<text x="260" y="400" class="b">samuelpflynn1@gmail.com</text>
+
+<text x="25" y="430" class="o">Student-Email:</text>
+<text x="260" y="430" class="b">spf16574@email.vccs.edu</text>
 
   
 <text x="25" y="490" class="o">GitHub Stats:</text>
