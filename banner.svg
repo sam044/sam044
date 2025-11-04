@@ -56,7 +56,7 @@ text,tspan { white-space:pre; }
 <text x="460" y="490" class="b">{<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">0</tspan>} |</text>
 <text x="590" y="490" class="b"><tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ............. </tspan><tspan class="value" id="star_data">0</tspan></text>
 
-<text x="260" y="510" class="b"><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> .................... </tspan><tspan class="value" id="commit_data">109</tspan></text>
+<text x="260" y="510" class="b"><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ................... </tspan><tspan class="value" id="commit_data">111</tspan></text>
 <text x="450" y="510" class="b">|</text>
 <text x="460" y="510" class="b"><tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ......... </tspan><tspan class="value" id="follower_data">1</tspan></text>
 </svg>
