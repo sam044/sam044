@@ -7,7 +7,7 @@ gray = "#d9d9d9"
 data = {
     "os": "Windows 11, Ubuntu 22.04",
     "location": "Northern Virginia (NoVA)",
-    "education": "Computer Science & Mathematics Student",
+    "education": "Computer Science &amp; Mathematics Student",
     "age": "20 years",
     "prog": "Java, Python, C++",
     "comp": "HTML, JSON, LaTeX",
