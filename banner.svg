@@ -6,14 +6,14 @@
   font-family: 'ConsolasFallback';
   font-display: swap;
 }
-.key { fill:#8b949e; }
-.value { fill:#ffa657; }
-.addColor { fill:#3fb950; }
-.delColor { fill:#f85149; }
-.cc { fill:#616e7f; }
-.o { fill:#8b949e; }
-.b { fill:#ffa657; }
-.t { fill:#8b949e; }
+.key { fill:#8b949e; }        /* GitHub Stats labels (Repos:, Stars:, etc.) */
+.value { fill:#ffa657; }      /* GitHub Stats numbers (the orange values) */
+.addColor { fill:#3fb950; }   /* Green color (if used) */
+.delColor { fill:#f85149; }   /* Red color (if used) */
+.cc { fill:#616e7f; }         /* Dots/separators color */
+.o { fill:#8b949e; }          /* Labels (Location:, Education:, etc.) */
+.b { fill:#ffa657; }          /* Values (Northern Virginia, 20 years, etc.) */
+.t { fill:#8b949e; }          /* Header text (Sam Flynn - Updated...) */
 text,tspan { white-space:pre; }
 </style>
 
