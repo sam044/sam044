@@ -2,27 +2,27 @@
 <div align="left">
 
 <pre>
-<span style="color:#3fa7ff;"><b>Sam Flynn</b></span>
+<span style="color:#f78c00;"><b>Sam Flynn</b></span>
 ──────────────────────────────────────────────────────────────
-<b><span style="color:#3fa7ff;">Age:</span></b>               20 years
-<b><span style="color:#3fa7ff;">Location:</span></b>          Northern Virginia (NoVA)
-<b><span style="color:#3fa7ff;">Education:</span></b>         Computer Science & Mathematics Student
+<span style="color:#f78c00;"><b>Age:</b></span>               <span style="color:#8be9fd;">20 years</span>
+<span style="color:#f78c00;"><b>Location:</b></span>          <span style="color:#8be9fd;">Northern Virginia (NoVA)</span>
+<span style="color:#f78c00;"><b>Education:</b></span>         <span style="color:#8be9fd;">Computer Science & Mathematics Student</span>
 
-<b><span style="color:#3fa7ff;">Languages-Programming:</span></b>    Java, Python, C++
-<b><span style="color:#3fa7ff;">Languages-Computer:</span></b>       HTML, JSON, LaTeX
-<b><span style="color:#3fa7ff;">Languages-Natural:</span></b>        English
+<span style="color:#f78c00;"><b>Languages-Programming:</b></span>    <span style="color:#8be9fd;">Java, Python, C++</span>
+<span style="color:#f78c00;"><b>Languages-Computer:</b></span>       <span style="color:#8be9fd;">HTML, JSON, LaTeX</span>
+<span style="color:#f78c00;"><b>Languages-Natural:</b></span>        <span style="color:#8be9fd;">English</span>
 
-<b><span style="color:#3fa7ff;">Hobbies:</span></b>           Software Architecture, Algorithmic Design, Gaming, Lifting
+<span style="color:#f78c00;"><b>Hobbies:</b></span>           <span style="color:#8be9fd;">Software Architecture, Algorithmic Design, Gaming, Lifting</span>
 
-<b><span style="color:#3fa7ff;">Contact:</span></b>
-  Personal-Email:   samuelpflynn1@gmail.com
-  Student-Email:    spf16574@email.vccs.edu
+<span style="color:#f78c00;"><b>Contact:</b></span>
+  <span style="color:#f78c00;">Personal-Email:</span>   <span style="color:#8be9fd;">samuelpflynn1@gmail.com</span>
+  <span style="color:#f78c00;">Student-Email:</span>    <span style="color:#8be9fd;">spf16574@email.vccs.edu</span>
 
-<b><span style="color:#3fa7ff;">Stats (in progress):</span></b>
-  Repositories:     00 {Contributed: 00}
-  Commits:          000
-  Stars:            00
-  Followers:        00
+<span style="color:#f78c00;"><b>Stats (in progress):</b></span>
+  <span style="color:#f78c00;">Repositories:</span>     <span style="color:#8be9fd;">00 {Contributed: 00}</span>
+  <span style="color:#f78c00;">Commits:</span>          <span style="color:#8be9fd;">000</span>
+  <span style="color:#f78c00;">Stars:</span>            <span style="color:#8be9fd;">00</span>
+  <span style="color:#f78c00;">Followers:</span>        <span style="color:#8be9fd;">00</span>
 ──────────────────────────────────────────────────────────────
 </pre>
 
