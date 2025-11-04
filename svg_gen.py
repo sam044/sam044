@@ -1,17 +1,19 @@
 import datetime
+import html
 
-# Accent colors
+# Colors & font
 ORANGE = "#f39c12"
 BLUE   = "#3fa7ff"
 GRAY   = "#d9d9d9"
 BG     = "#0d1117"
-FONT = "Consolas, 'Courier New', monospace"
+FONT   = "Consolas, 'Courier New', monospace"
 
+# Data (your values)
 data = {
     "name": "Sam Flynn",
     "date": datetime.date.today().strftime("%b %d, %Y"),
     "location": "Northern Virginia (NoVA)",
-    "education": "Computer Science &amp; Mathematics Student",  # XML-escaped &
+    "education": "Computer Science & Mathematics Student",
     "age": "20 years",
     "prog": "Java, Python, C++",
     "comp": "HTML, JSON, LaTeX",
@@ -19,18 +21,25 @@ data = {
     "hobbies": "Software Architecture, Algorithmic Design, Weightlifting",
     "personal": "samuelpflynn1@gmail.com",
     "student": "spf16574@email.vccs.edu",
-    # You can wire real stats later; placeholders are fine
     "repos": "1",
     "commits": "000",
     "stars": "0",
     "followers": "0",
 }
 
-# y positions (after removing the OS row, everything shifts up a notch)
-Y0   = 40   # header line
-STEP = 30   # line spacing
+# Escape XML-reserved chars just in case (e.g., the & in CS & Math)
+for k, v in data.items():
+    if isinstance(v, str):
+        data[k] = html.escape(v, quote=False)
 
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
+# Positions
+Y0   = 40
+STEP = 30
+
+# Header line with an em-dash written as \u2014 to avoid smart-char issues
+header_text = f"{data['name']} \\u2014 Updated {data['date']}"
+
+svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
   style="background-color:{BG};font-family:{FONT};">
   <style>
     .o {{ fill:{ORANGE}; font-weight:bold; }}
@@ -39,9 +48,9 @@ STEP = 30   # line spacing
   </style>
 
   <!-- Header -->
-  <text x="25" y="{Y0}" class="t">{data['name']} — Updated {data['date']}</text>
+  <text x="25" y="{Y0}" class="t">{header_text}</text>
 
-  <!-- Left labels (orange) and right values (blue) -->
+  <!-- Body -->
   <text x="25"  y="{Y0+2*STEP}" class="o">Location:</text>
   <text x="260" y="{Y0+2*STEP}" class="b">{data['location']}</text>
 
