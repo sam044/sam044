@@ -1,176 +1,116 @@
+"""
+Sam Flynn — Automated GitHub Profile Banner
+────────────────────────────────────────────────────────────
+• Pulls live GitHub stats via GraphQL v4
+• Rewrites banner.svg in-place with dotted alignment
+• Minimal, single-banner adaptation of Alan's system
+"""
+
 from __future__ import annotations
-import datetime as dt, hashlib, json, os, re, time
-from pathlib import Path
-from typing import Dict, Any, Iterable
-import requests
+import os, requests
 from lxml import etree
 
 # ──────────────────────────────────────
-#  ░░ USER CONFIG (keep yours) ░░
+#  ░░ CONFIG ░░
 # ──────────────────────────────────────
-USER_NAME: str = os.getenv("USER_NAME", "Alans44")   # <- override in workflow to yours
-BIRTHDAY = dt.datetime(2004, 4, 4)                   # yyyy, m, d (keep if you print age)
-SVG_FILES = ["banner.svg"]                           # keep your file list; light/dark optional
-CACHE_DIR = Path("cache"); CACHE_DIR.mkdir(exist_ok=True)
-COMMENT_SIZE = 7                                     # if you reserve comment lines in SVG
+USER_NAME = os.getenv("USER_NAME", "sam044")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+if not ACCESS_TOKEN:
+    raise RuntimeError("Missing ACCESS_TOKEN. Add it under repo → Settings → Secrets → Actions.")
+HEADERS = {"authorization": f"Bearer {ACCESS_TOKEN}"}
+GRAPHQL_URL = "https://api.github.com/graphql"
+SVG_FILE = "banner.svg"
 
 # ──────────────────────────────────────
-#  ░░ INTERNALS ░░
+#  ░░ HELPERS ░░
 # ──────────────────────────────────────
-GQL = "https://api.github.com/graphql"
-GH_TOKEN = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
-HEADERS = {"Authorization": f"bearer {GH_TOKEN}"} if GH_TOKEN else {}
-
-def _gql(query: str, variables: Dict[str, Any] | None = None) -> Dict[str, Any]:
-    r = requests.post(GQL, json={"query": query, "variables": variables or {}}, headers=HEADERS, timeout=30)
+def simple_request(name: str, query: str, variables: dict) -> dict:
+    r = requests.post(GRAPHQL_URL, json={"query": query, "variables": variables},
+                      headers=HEADERS, timeout=30)
     if r.status_code != 200:
-        raise RuntimeError(f"GraphQL HTTP {r.status_code}: {r.text}")
+        raise RuntimeError(f"{name} failed ({r.status_code}): {r.text}")
     data = r.json()
     if "errors" in data:
-        raise RuntimeError(f"GraphQL errors: {data['errors']}")
+        raise RuntimeError(f"{name} error: {data['errors']}")
     return data["data"]
 
-def _cache_path(name: str) -> Path:
-    key = hashlib.sha256(name.encode()).hexdigest()[:16]
-    return CACHE_DIR / f"{key}.json"
+def find_and_replace(root, eid: str, new_text: str):
+    el = root.find(f".//*[@id='{eid}']")
+    if el is None:
+        return
+    el.text = str(new_text)
+    # keep same x alignment (Alan-style)
+    parent_x = el.getparent().get("x")
+    if parent_x:
+        el.set("x", parent_x)
 
-def cache_get(name: str, max_age_s: int) -> Any | None:
-    p = _cache_path(name)
-    if not p.exists(): return None
-    if time.time() - p.stat().st_mtime > max_age_s: return None
-    try:
-        return json.loads(p.read_text(encoding="utf-8"))
-    except Exception:
-        return None
+def justify_format(root, eid: str, new_text, length: int = 0):
+    """Writes value and adjusts filler dot length for alignment (Alan-style)."""
+    if isinstance(new_text, int):
+        new_text = f"{new_text:,}"
+    find_and_replace(root, eid, new_text)
+    just_len = max(0, length - len(str(new_text)))
+    dot_map = {0: "", 1: " ", 2: ". "}
+    dot_string = dot_map.get(just_len, " " + "." * just_len + " ")
+    find_and_replace(root, f"{eid}_dots", dot_string)
 
-def cache_put(name: str, obj: Any) -> None:
-    _cache_path(name).write_text(json.dumps(obj, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+# ──────────────────────────────────────
+#  ░░ DATA FETCHERS ░░
+# ──────────────────────────────────────
+def follower_count(username: str) -> int:
+    q = """query($login:String!){user(login:$login){followers{totalCount}}}"""
+    d = simple_request("followers", q, {"login": username})
+    return d["user"]["followers"]["totalCount"]
 
-def get_user_stats(login: str) -> Dict[str, Any]:
-    """Pulls live stats with a single GraphQL round-trip (plus a languages pass that’s cached)."""
-    q = """
-    query($login: String!) {
-      user(login: $login) {
-        name
-        login
-        followers { totalCount }
-        following { totalCount }
-        repositories(privacy: PUBLIC, isFork: false) { totalCount }
-        starredRepositories { totalCount }
-        pullRequests(states: MERGED) { totalCount }
-        issues(states: CLOSED) { totalCount }
-        contributionsCollection {
-          totalCommitContributions
-          restrictedContributionsCount
-          pullRequestContributionsByRepository { contributions { totalCount } }
-        }
-        repositoriesContributedTo(contributionTypes: [COMMIT], privacy: PUBLIC, includeUserRepositories: false) {
-          totalCount
-        }
-        topRepositories(first: 8, orderBy: {field: STARGAZERS, direction: DESC}) {
-          nodes { name stargazerCount }
-        }
-      }
-    }"""
-    d = _gql(q, {"login": login})["user"]
+def repo_count(username: str) -> int:
+    q = """query($login:String!){user(login:$login){
+      repositories(ownerAffiliations: OWNER, isFork:false){totalCount}}}"""
+    d = simple_request("repos", q, {"login": username})
+    return d["user"]["repositories"]["totalCount"]
 
-    # Language-bytes snapshot (cached ~1 day) using REST to stay cheap; approx LOC = bytes/50.
-    lang_cache_key = f"langs:{login}"
-    langs = cache_get(lang_cache_key, max_age_s=24*3600)
-    if langs is None:
-        # pull first 100 public repos’ languages (good enough for a banner)
-        # (GraphQL languagesCollection exists but can be heavy; REST per-repo with ETags is fine)
-        langs = {}
-        page = 1
-        while page <= 2:  # cap to ~200 repos for rate safety
-            rr = requests.get(
-                f"https://api.github.com/users/{login}/repos",
-                params={"per_page": 100, "page": page, "type": "public", "sort": "updated"},
-                headers=HEADERS, timeout=30
-            )
-            rr.raise_for_status()
-            repos = rr.json()
-            if not repos: break
-            for repo in repos:
-                lr = requests.get(repo["languages_url"], headers=HEADERS, timeout=30)
-                if lr.status_code == 200:
-                    for lang, bytes_ in lr.json().items():
-                        langs[lang] = langs.get(lang, 0) + int(bytes_)
-            page += 1
-        cache_put(lang_cache_key, langs)
+def star_count(username: str) -> int:
+    q = """query($login:String!, $cursor:String){
+      user(login:$login){
+        repositories(first:100, after:$cursor, ownerAffiliations: OWNER, isFork:false){
+          nodes{stargazers{totalCount}}
+          pageInfo{hasNextPage endCursor}
+        }}}"""
+    total, cursor = 0, None
+    while True:
+        d = simple_request("stars", q, {"login": username, "cursor": cursor})
+        repos = d["user"]["repositories"]
+        total += sum(r["stargazers"]["totalCount"] for r in repos["nodes"])
+        if not repos["pageInfo"]["hasNextPage"]:
+            break
+        cursor = repos["pageInfo"]["endCursor"]
+    return total
 
-    total_lang_bytes = sum(langs.values()) or 1
-    top_langs = sorted(langs.items(), key=lambda kv: kv[1], reverse=True)[:5]
-    approx_loc = total_lang_bytes // 50  # rough byte→LOC heuristic
+def commit_count(username: str) -> int:
+    q = """query($login:String!){user(login:$login){
+      contributionsCollection{totalCommitContributions}}}"""
+    d = simple_request("commits", q, {"login": username})
+    return d["user"]["contributionsCollection"]["totalCommitContributions"]
 
-    # Flatten stats for templating
-    stats = {
-        "name": d.get("name") or login,
-        "login": d["login"],
-        "followers": d["followers"]["totalCount"],
-        "following": d["following"]["totalCount"],
-        "public_repos": d["repositories"]["totalCount"],
-        "stars": d["starredRepositories"]["totalCount"],
-        "merged_prs": d["pullRequests"]["totalCount"],
-        "closed_issues": d["issues"]["totalCount"],
-        "commits_year": d["contributionsCollection"]["totalCommitContributions"]
-                        + d["contributionsCollection"]["restrictedContributionsCount"],
-        "repos_contributed_to": d["repositoriesContributedTo"]["totalCount"],
-        "top_repo_stars": sum(n["stargazerCount"] for n in d["topRepositories"]["nodes"]),
-        "approx_loc": int(approx_loc),
-        "age_years": int((dt.datetime.utcnow() - BIRTHDAY).days // 365),
-        "top_langs": [{"name": k, "pct": round(v * 100 / total_lang_bytes, 1)} for k, v in top_langs],
-    }
-    return stats
-
-def _update_svg(svg_path: Path, stats: Dict[str, Any]) -> None:
-    """
-    Update text nodes by matching data-stat attributes.
-    Example in SVG:
-      <text id="commits" data-stat="commits_year">0</text>
-      <text id="followers" data-stat="followers">0</text>
-    For top languages (optional):
-      <text data-stat="lang_1">Python 45%</text> ... up to lang_5
-    """
-    parser = etree.XMLParser(remove_comments=False)
-    root = etree.parse(str(svg_path), parser)
-
-    # Fill simple numeric/name fields
-    for el in root.xpath('//*[@data-stat]'):
-        key = el.attrib.get("data-stat")
-        if key.startswith("lang_"):
-            # lang_1 .. lang_5
-            try:
-                idx = int(key.split("_")[1]) - 1
-                if idx < len(stats["top_langs"]):
-                    li = stats["top_langs"][idx]
-                    el.text = f"{li['name']} {li['pct']}%"
-                else:
-                    el.text = ""
-            except Exception:
-                pass
-        else:
-            if key in stats:
-                el.text = f"{stats[key]}"
-
-    # Optional: write a generated-on comment block for debugging/versioning
-    comment = etree.Comment(f"generated {dt.datetime.utcnow().isoformat(timespec='seconds')}Z")
-    if COMMENT_SIZE:
-        root.getroot().append(comment)
-
-    svg_path.write_bytes(etree.tostring(root, xml_declaration=True, encoding="UTF-8"))
-
-def main():
-    if not HEADERS:
-        raise SystemExit("Missing GH_TOKEN/GITHUB_TOKEN for API access.")
-    stats = get_user_stats(USER_NAME)
-    for f in SVG_FILES:
-        p = Path(f)
-        if p.exists():
-            _update_svg(p, stats)
-        else:
-            print(f"[warn] {p} not found, skipping")
-    # If you also rewrite README.md badges/text, you can add that here.
-
+# ──────────────────────────────────────
+#  ░░ MAIN ░░
+# ──────────────────────────────────────
 if __name__ == "__main__":
-    main()
+    print("Updating banner.svg with live GitHub stats...")
+
+    followers = follower_count(USER_NAME)
+    repos = repo_count(USER_NAME)
+    stars = star_count(USER_NAME)
+    commits = commit_count(USER_NAME)
+
+    # load your existing SVG
+    tree = etree.parse(SVG_FILE)
+    root = tree.getroot()
+
+    # replace numeric data — add filler IDs in your SVG for style if desired
+    justify_format(root, "repo_data", repos, 6)
+    justify_format(root, "star_data", stars, 14)
+    justify_format(root, "commit_data", commits, 22)
+    justify_format(root, "follower_data", followers, 10)
+
+    tree.write(SVG_FILE, encoding="utf-8", xml_declaration=True)
+    print("✅ banner.svg updated successfully.")
