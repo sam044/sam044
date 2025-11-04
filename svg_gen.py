@@ -18,7 +18,7 @@ data = {
     "prog": "Java, Python, C++",
     "comp": "HTML, JSON, LaTeX",
     "lang": "English",
-    "hobbies": "Software Architecture, Algorithmic Design, Weightlifting",
+    "hobbies": "Software Architecture, Algorithmic Design, Gaming, Weightlifting",
     "personal": "samuelpflynn1@gmail.com",
     "student": "spf16574@email.vccs.edu",
     "repos": "1",
