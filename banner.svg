@@ -55,7 +55,7 @@ text,tspan { white-space:pre; }
 </text>
 
 <text x="260" y="510" class="b">
-  <tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots" x="260"> .................... </tspan><tspan class="value" id="commit_data" x="260">79</tspan>
+  <tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots" x="260"> .................... </tspan><tspan class="value" id="commit_data" x="260">80</tspan>
   | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots" x="260"> ......... </tspan><tspan class="value" id="follower_data" x="260">1</tspan>
 </text>
 </svg>
