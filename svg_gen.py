@@ -37,7 +37,8 @@ Y0   = 40
 STEP = 30
 
 # Header line with an em-dash written as \u2014 to avoid smart-char issues
-header_text = f"{data['name']} — Updated {data['date']}"
+header_text = f"{data['name']} &#8212; Updated {data['date']}"
+
 
 svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
   style="background-color:{BG};font-family:{FONT};">
