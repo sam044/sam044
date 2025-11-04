@@ -1,21 +1,44 @@
-
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="550" style="background-color:#0d1117;font-family:'Consolas','Courier New',monospace;">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520"
+  style="background-color:#0d1117;font-family:'Consolas','Courier New',monospace';">
   <style>
-    .o{fill:#f39c12;font-weight:bold;}
-    .b{fill:#3fa7ff;}
-    .t{fill:#d9d9d9;}
+    .o { fill:#f39c12; font-weight:bold; }
+    .b { fill:#3fa7ff; }
+    .t { fill:#d9d9d9; }
   </style>
-  <text x="25" y="40" class="t">sam@flynn — Updated Nov 04, 2025</text>
-  <text x="25" y="80"  class="o">OS:</text> <text x="240" y="80" class="b">Windows 11, Ubuntu 22.04</text>
-  <text x="25" y="110" class="o">Location:</text> <text x="240" y="110" class="b">Northern Virginia (NoVA)</text>
-  <text x="25" y="140" class="o">Education:</text> <text x="240" y="140" class="b">Computer Science &amp; Mathematics Student</text>
-  <text x="25" y="170" class="o">Age:</text> <text x="240" y="170" class="b">20 years</text>
-  <text x="25" y="210" class="o">Languages.Programming:</text> <text x="350" y="210" class="b">Java, Python, C++</text>
-  <text x="25" y="240" class="o">Languages.Computer:</text> <text x="350" y="240" class="b">HTML, JSON, LaTeX</text>
-  <text x="25" y="270" class="o">Languages.Natural:</text> <text x="350" y="270" class="b">English</text>
-  <text x="25" y="310" class="o">Hobbies:</text> <text x="240" y="310" class="b">Software Architecture, Algorithmic Design, Weightlifting</text>
-  <text x="25" y="350" class="o">Contact.Personal:</text> <text x="350" y="350" class="b">samuelpflynn1@gmail.com</text>
-  <text x="25" y="380" class="o">Contact.Student:</text> <text x="350" y="380" class="b">spf16574@email.vccs.edu</text>
-  <text x="25" y="420" class="o">GitHub Stats:</text>
-  <text x="240" y="420" class="b">Repos 1 | Commits 000 | Stars 0 | Followers 0</text>
+
+  <!-- Header -->
+  <text x="25" y="40" class="t">Sam Flynn — Updated Nov 04, 2025</text>
+
+  <!-- Left labels (orange) and right values (blue) -->
+  <text x="25"  y="100" class="o">Location:</text>
+  <text x="260" y="100" class="b">Northern Virginia (NoVA)</text>
+
+  <text x="25"  y="130" class="o">Education:</text>
+  <text x="260" y="130" class="b">Computer Science &amp; Mathematics Student</text>
+
+  <text x="25"  y="160" class="o">Age:</text>
+  <text x="260" y="160" class="b">20 years</text>
+
+  <text x="25"  y="220" class="o">Languages-Programming:</text>
+  <text x="260" y="220" class="b">Java, Python, C++</text>
+
+  <text x="25"  y="250" class="o">Languages-Computer:</text>
+  <text x="260" y="250" class="b">HTML, JSON, LaTeX</text>
+
+  <text x="25"  y="280" class="o">Languages-Natural:</text>
+  <text x="260" y="280" class="b">English</text>
+
+  <text x="25"  y="340" class="o">Hobbies:</text>
+  <text x="260" y="340" class="b">Software Architecture, Algorithmic Design, Weightlifting</text>
+
+  <text x="25"  y="400" class="o">Personal-Email:</text>
+  <text x="260" y="400" class="b">samuelpflynn1@gmail.com</text>
+
+  <text x="25"  y="430" class="o">Student-Email:</text>
+  <text x="260" y="430" class="b">spf16574@email.vccs.edu</text>
+
+  <text x="25"  y="490" class="o">GitHub Stats:</text>
+  <text x="260" y="490" class="b">
+    Repos 1 | Commits 000 | Stars 0 | Followers 0
+  </text>
 </svg>
