@@ -8,7 +8,7 @@
   <text x="25" y="40" class="t">sam@flynn — Updated Nov 04, 2025</text>
   <text x="25" y="80"  class="o">OS:</text> <text x="240" y="80" class="b">Windows 11, Ubuntu 22.04</text>
   <text x="25" y="110" class="o">Location:</text> <text x="240" y="110" class="b">Northern Virginia (NoVA)</text>
-  <text x="25" y="140" class="o">Education:</text> <text x="240" y="140" class="b">Computer Science & Mathematics Student</text>
+  <text x="25" y="140" class="o">Education:</text> <text x="240" y="140" class="b">Computer Science &amp; Mathematics Student</text>
   <text x="25" y="170" class="o">Age:</text> <text x="240" y="170" class="b">20 years</text>
   <text x="25" y="210" class="o">Languages.Programming:</text> <text x="350" y="210" class="b">Java, Python, C++</text>
   <text x="25" y="240" class="o">Languages.Computer:</text> <text x="350" y="240" class="b">HTML, JSON, LaTeX</text>
