@@ -1,5 +1,9 @@
+<p align="center">
+  <img src="banner.svg">
+</p>
+
 <pre>
-sam@flynn
+Sam Flynn
 ──────────────────────────────────────────────────────────────
 <b style="color:#f39c12;">OS:</b>                  Windows 11, Ubuntu 22.04  
 <b style="color:#f39c12;">Location:</b>            Northern Virginia (NoVA)  
