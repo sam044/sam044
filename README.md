@@ -17,12 +17,6 @@
 <span style="color:#f78c00;"><b>Contact:</b></span>
   <span style="color:#f78c00;">Personal-Email:</span>   <span style="color:#8be9fd;">samuelpflynn1@gmail.com</span>
   <span style="color:#f78c00;">Student-Email:</span>    <span style="color:#8be9fd;">spf16574@email.vccs.edu</span>
-
-<span style="color:#f78c00;"><b>Stats (in progress):</b></span>
-  <span style="color:#f78c00;">Repositories:</span>     <span style="color:#8be9fd;">00 {Contributed: 00}</span>
-  <span style="color:#f78c00;">Commits:</span>          <span style="color:#8be9fd;">000</span>
-  <span style="color:#f78c00;">Stars:</span>            <span style="color:#8be9fd;">00</span>
-  <span style="color:#f78c00;">Followers:</span>        <span style="color:#8be9fd;">00</span>
 ──────────────────────────────────────────────────────────────
 </pre>
 
