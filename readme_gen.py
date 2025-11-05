@@ -12,6 +12,7 @@ from lxml import etree
 #  ░░ USER CONFIG 
 # ──────────────────────────────────────
 USER_NAME: str = os.getenv("USER_NAME", "sam044")
+BIRTHDAY  = datetime.datetime(2004, 4, 4)     # used for "Uptime" / Age line if present
 SVG_FILES = ["banner.svg"]                   # single dark banner
 CACHE_DIR = Path("cache"); CACHE_DIR.mkdir(exist_ok=True)
 COMMENT_SIZE = 7
@@ -30,6 +31,9 @@ QUERY_COUNT = {k: 0 for k in [
 # ╭──────────────────────────────────╮
 # │  Utility helpers  │
 # ╰──────────────────────────────────╯
+def uptime_string(bday: datetime.datetime) -> str:
+    diff = relativedelta.relativedelta(datetime.datetime.utcnow(), bday)
+    return f"{diff.years} year{'s'*(diff.years!=1)}, {diff.months} month{'s'*(diff.months!=1)}, {diff.days} day{'s'*(diff.days!=1)}"
 
 def perf_counter(fn, *args):
     start = time.perf_counter(); out = fn(*args)
@@ -49,7 +53,7 @@ def simple_request(fname: str, q: str, v: dict):
         if "errors" in data:
             raise RuntimeError(f"{fname} failed (GraphQL): {data['errors']}")
         return data
-    raise RuntimeError(f"{fname} failed → {r.status_code}: {r.text}")
+    raise RuntimeError(f"{fname} failed + {r.status_code}: {r.text}")
 
 # ╭──────────────────────────────────╮
 # │  SVG helpers (IDs must match)    │
@@ -58,20 +62,21 @@ def find_and_replace(root, element_id: str, new_text: str):
     el = root.find(f".//*[@id='{element_id}']")
     if el is None: return
     el.text = str(new_text)
-    # Removed setting x attribute to prevent text overlap
+    # Removed setting x attribute to prevent text overlap in GitHub Stats
     # parent_x = el.getparent().get("x")
     # if parent_x: el.set("x", parent_x)
 
 def justify_format(root, eid, new_text, length=0):
     if isinstance(new_text, int): new_text = f"{new_text:,}"
     find_and_replace(root, eid, new_text)
-    just_len = max(0, length - len(str(new_text)))
-    dot_map = {0:'', 1:' ', 2:'. '}
-    dot_string = dot_map.get(just_len, ' ' + '.'*just_len + ' ')
-    find_and_replace(root, f"{eid}_dots", dot_string)
+    # Removed dot generation - dots no longer needed
+    # just_len = max(0, length - len(str(new_text)))
+    # dot_map = {0:'', 1:' ', 2:'. '}
+    # dot_string = dot_map.get(just_len, ' ' + '.'*just_len + ' ')
+    # find_and_replace(root, f"{eid}_dots", dot_string)
 
 def svg_overwrite(fname, *vals):
-    # Order matches aaa’s usage:
+    # Order matches aaa's usage:
     # age, commits, stars, repos, contributed, followers, loc_tuple
     age, comm, star, repo, contrib, follow, loc = vals
     tree = etree.parse(fname); root = tree.getroot()
@@ -82,7 +87,7 @@ def svg_overwrite(fname, *vals):
     justify_format(root, 'repo_data',     repo,    6)
     justify_format(root, 'contrib_data',  contrib)
     justify_format(root, 'follower_data', follow, 10)
-    # LOC placeholders (aaa’s SVG shows these IDs; keep zeros if you don’t render them)
+    # LOC placeholders (aaa's SVG shows these IDs; keep zeros if you don't render them)
     justify_format(root, 'loc_data', loc[2], 9)
     justify_format(root, 'loc_add',  loc[0])
     justify_format(root, 'loc_del',  loc[1], 7)
@@ -144,7 +149,7 @@ def contributed_repos_count(username: str) -> int:
     return int(r["totalCount"])
 
 # ╭──────────────────────────────────╮
-# │  Main (matches aaa’s flow)     │
+# │  Main (matches aaa's flow)     │
 # ╰──────────────────────────────────╯
 if __name__ == '__main__':
     print('Calculation times:')
@@ -161,7 +166,7 @@ if __name__ == '__main__':
     follower_data = follower_getter(USER_NAME)
     commit_data = commits_last_year(USER_NAME)
 
-    # LOC not implemented here (same as aaa’s public script baseline)
+    # LOC not implemented here (same as aaa's public script baseline)
     loc_total = ['0', '0', '0']  # add real LOC later if you want
 
     for svg in SVG_FILES:
