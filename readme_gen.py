@@ -12,7 +12,6 @@ from lxml import etree
 #  ░░ USER CONFIG 
 # ──────────────────────────────────────
 USER_NAME: str = os.getenv("USER_NAME", "sam044")
-BIRTHDAY  = datetime.datetime(2004, 4, 4)     # used for "Uptime" / Age line if present
 SVG_FILES = ["banner.svg"]                   # single dark banner
 CACHE_DIR = Path("cache"); CACHE_DIR.mkdir(exist_ok=True)
 COMMENT_SIZE = 7
@@ -31,9 +30,6 @@ QUERY_COUNT = {k: 0 for k in [
 # ╭──────────────────────────────────╮
 # │  Utility helpers  │
 # ╰──────────────────────────────────╯
-def uptime_string(bday: datetime.datetime) -> str:
-    diff = relativedelta.relativedelta(datetime.datetime.utcnow(), bday)
-    return f"{diff.years} year{'s'*(diff.years!=1)}, {diff.months} month{'s'*(diff.months!=1)}, {diff.days} day{'s'*(diff.days!=1)}"
 
 def perf_counter(fn, *args):
     start = time.perf_counter(); out = fn(*args)
