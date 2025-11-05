@@ -53,6 +53,6 @@ text,tspan { white-space:pre; }
 <text x="25" y="490" class="o">GitHub Stats:</text>
 <text x="260" y="490" class="b"><tspan class="key">Repos</tspan>: <tspan class="value" id="repo_data">2</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">0</tspan>}</text>
 <text x="260" y="510" class="b"><tspan class="key">Stars</tspan>: <tspan class="value" id="star_data">1</tspan></text>
-<text x="260" y="530" class="b"><tspan class="key">Commits</tspan>: <tspan class="value" id="commit_data">122</tspan></text>
-<text x="260" y="550" class="b"><tspan class="key">Followers</tspan>: <tspan class="value" id="follower_data">3</tspan></text>
+<text x="260" y="530" class="b"><tspan class="key">Commits</tspan>: <tspan class="value" id="commit_data">123</tspan></text>
+<text x="260" y="550" class="b"><tspan class="key">Followers</tspan>: <tspan class="value" id="follower_data">5</tspan></text>
 </svg>
